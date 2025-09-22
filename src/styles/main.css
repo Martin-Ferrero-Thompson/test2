@@ -93,3 +93,26 @@ body {
 section[id] {
     scroll-margin-top: calc(var(--header-height) + 12px);
 }
+
+/* Smooth anchor scroll (reduced-motion safe) */
+html {
+    scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+}
+
+/* Cross-document View Transition fade for language switch */
+@keyframes vt-fade-out { to { opacity: 0; } }
+@keyframes vt-fade-in { from { opacity: 0; } to { opacity: 1; } }
+::view-transition-old(root) { animation: vt-fade-out 150ms ease-out both; }
+::view-transition-new(root) { animation: vt-fade-in 150ms ease-in both; }
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
+
+/* Manual fallback fade class if View Transitions unsupported */
+.lang-switch-fade {
+    opacity: 0;
+    transition: opacity 150ms ease;
+}

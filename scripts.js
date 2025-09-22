@@ -5,6 +5,34 @@
   const TARGET_DATE = new Date("2026-09-30T08:30:00+02:00"); // 8:30 AM Madrid time for the ride start
   const END_URL = "#progress"; // Anchor link to the progress section
 
+  const lang = (document.documentElement.getAttribute('lang') || 'en').toLowerCase().startsWith('es') ? 'es' : 'en';
+  const i18n = {
+    en: {
+      begins: (dateStr) => `The challenge begins on ${dateStr}`,
+      underway: 'The ride is underway! Follow the progress below.',
+      units: {
+        year: ['Year', 'Years'],
+        day: ['Day', 'Days'],
+        hour: ['Hour', 'Hours'],
+        minute: ['Minute', 'Minutes'],
+        second: ['Second', 'Seconds'],
+      },
+      dateLocale: 'en-GB',
+    },
+    es: {
+      begins: (dateStr) => `El reto comienza el ${dateStr}`,
+      underway: '¡La ruta está en marcha! Sigue el progreso más abajo.',
+      units: {
+        year: ['Año', 'Años'],
+        day: ['Día', 'Días'],
+        hour: ['Hora', 'Horas'],
+        minute: ['Minuto', 'Minutos'],
+        second: ['Segundo', 'Segundos'],
+      },
+      dateLocale: 'es-ES',
+    }
+  }[lang];
+
   const displayEl = document.getElementById("cd-display");
   const msgEl = document.getElementById("cd-message");
   const countdownContainer = document.getElementById("countdown");
@@ -20,7 +48,7 @@
 
     if (diff <= 0) {
       msgEl.classList.remove("hidden");
-      msgEl.textContent = "The ride is underway! Follow the progress below.";
+      msgEl.textContent = i18n.underway;
       countdownContainer.innerHTML = ""; // Clear the countdown numbers
       clearInterval(timer);
       return;
@@ -35,16 +63,17 @@
     const years = Math.floor(days / 365);
     days = days % 365;
     
-    const parts = [];
-    if (years > 0) parts.push(`<div class="text-center"><div class="font-bold text-2xl md:text-3xl">${years}</div><div class="text-xs">Year${years > 1 ? 's' : ''}</div></div>`);
-    if (days > 0 || years > 0) parts.push(`<div class="text-center"><div class="font-bold text-2xl md:text-3xl">${days}</div><div class="text-xs">Day${days > 1 ? 's' : ''}</div></div>`);
-    if (hours > 0 || days > 0 || years > 0) parts.push(`<div class="text-center"><div class="font-bold text-2xl md:text-3xl">${hours}</div><div class="text-xs">Hour${hours > 1 ? 's' : ''}</div></div>`);
-    parts.push(`<div class="text-center"><div class="font-bold text-2xl md:text-3xl">${minutes}</div><div class="text-xs">Minute${minutes > 1 ? 's' : ''}</div></div>`);
-    parts.push(`<div class="text-center"><div class="font-bold text-2xl md:text-3xl">${seconds}</div><div class="text-xs">Second${seconds > 1 ? 's' : ''}</div></div>`);
+  function label([singular, plural], n) { return n === 1 ? singular : plural; }
+  const parts = [];
+  if (years > 0) parts.push(`<div class="text-center"><div class="font-bold text-2xl md:text-3xl">${years}</div><div class="text-xs">${label(i18n.units.year, years)}</div></div>`);
+  if (days > 0 || years > 0) parts.push(`<div class="text-center"><div class="font-bold text-2xl md:text-3xl">${days}</div><div class="text-xs">${label(i18n.units.day, days)}</div></div>`);
+  if (hours > 0 || days > 0 || years > 0) parts.push(`<div class="text-center"><div class="font-bold text-2xl md:text-3xl">${hours}</div><div class="text-xs">${label(i18n.units.hour, hours)}</div></div>`);
+  parts.push(`<div class="text-center"><div class="font-bold text-2xl md:text-3xl">${minutes}</div><div class="text-xs">${label(i18n.units.minute, minutes)}</div></div>`);
+  parts.push(`<div class="text-center"><div class="font-bold text-2xl md:text-3xl">${seconds}</div><div class="text-xs">${label(i18n.units.second, seconds)}</div></div>`);
     
     displayEl.innerHTML = parts.join('<div class="text-2xl md:text-3xl font-bold">:</div>');
-    const targetLocaleString = TARGET_DATE.toLocaleString("en-GB", { day: '2-digit', month: 'long', year: 'numeric', timeZone: "Europe/Madrid" });
-    msgEl.textContent = `The challenge begins on ${targetLocaleString}`;
+    const targetLocaleString = TARGET_DATE.toLocaleString(i18n.dateLocale, { day: '2-digit', month: 'long', year: 'numeric', timeZone: "Europe/Madrid" });
+    msgEl.textContent = i18n.begins(targetLocaleString);
   }
 
   updateCountdown();
@@ -56,29 +85,30 @@
 (function () {
   // All our campaign data lives in this one object.
   // This is the ONLY place you'll make daily updates during the ride.
+  const isES = (document.documentElement.getAttribute('lang') || 'en').toLowerCase().startsWith('es');
   const campaignConfig = {
     days: {
-      label: "Days Completed",
+      label: isES ? "Días completados" : "Days Completed",
       current: 3, // <-- UPDATE THIS NUMBER
       total: 21,
       unit: ''
     },
     distance: {
-      label: "Distance Ridden",
+      label: isES ? "Kilómetros recorridos" : "Distance Ridden",
       current: 756, // <-- UPDATE THIS NUMBER
       total: 1685,
       unit: 'km'
     },
     climbing: {
-      label: "Metres Climbed",
+      label: isES ? "Metros ascendidos" : "Metres Climbed",
       current: 5999, // <-- UPDATE THIS NUMBER
       total: 34900,
       unit: 'm'
     },
     funds: {
-      label: "Funds Raised for GBS",
+      label: isES ? "Fondos recaudados para el SGB" : "Funds Raised for GBS",
       current: 20, // <-- UPDATE THIS NUMBER
-      unit: '€'
+      unit: isES ? '€' : '£'
    }
   };
 
@@ -95,17 +125,19 @@ function updateStat(statName) {
   
   if (!valueEl || !labelEl) return;
 
-  const formattedCurrent = config.current.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+  const locale = isES ? 'es-ES' : 'en-GB';
+  const formattedCurrent = config.current.toLocaleString(locale, {minimumFractionDigits: 0, maximumFractionDigits: 0});
   
   // Update the text label
   labelEl.textContent = config.label;
 
   // Update the value - check if it's a progress stat or a simple stat
   if (config.total) {
-    const formattedTotal = config.total.toLocaleString('en-US');
+    const formattedTotal = config.total.toLocaleString(locale);
     valueEl.textContent = `${formattedCurrent} / ${formattedTotal} ${config.unit}`.trim();
   } else {
-    valueEl.textContent = `${config.unit}${formattedCurrent}`;
+    // Place symbol after for EUR in Spanish, before for GBP in English
+    valueEl.textContent = isES ? `${formattedCurrent}${config.unit}` : `${config.unit}${formattedCurrent}`;
   }
   
   // Update the progress bar, if it exists
@@ -181,6 +213,8 @@ updateStat('funds');
   const link = document.getElementById('sponsor-download');
   if (!link) return; // Not on this page
 
+  const isES = (document.documentElement.getAttribute('lang') || 'en').toLowerCase().startsWith('es');
+
   function ensureRoot() {
     let root = document.getElementById('toast-root');
     if (!root) {
@@ -247,9 +281,9 @@ updateStat('funds');
     text.textContent = message;
 
     // Dismiss button
-    const dismiss = document.createElement('button');
+  const dismiss = document.createElement('button');
     dismiss.setAttribute('type', 'button');
-    dismiss.setAttribute('aria-label', 'Dismiss notification');
+  dismiss.setAttribute('aria-label', isES ? 'Cerrar notificación' : 'Dismiss notification');
     dismiss.style.marginLeft = 'auto';
     dismiss.style.color = 'rgba(255,255,255,0.7)';
     dismiss.style.background = 'transparent';
@@ -287,8 +321,62 @@ updateStat('funds');
   }
 
   link.addEventListener('click', function () {
-    const message = this.getAttribute('data-toast-message') || 'Thanks! Your download is starting.';
+    const message = this.getAttribute('data-toast-message') || (isES ? '¡Gracias! Tu descarga está comenzando.' : 'Thanks! Your download is starting.');
     // Fire and forget toast. Do not block navigation; PDF opens in new tab if target set.
     showToast(message, { duration: 3500 });
+  });
+})();
+
+
+// ============== LANGUAGE SWITCH: PRESERVE CURRENT SECTION ==============
+(function () {
+  const links = document.querySelectorAll('a[data-lang]');
+  if (!links.length) return;
+
+  function getCurrentAnchor() {
+    if (window.location.hash && window.location.hash.length > 1) {
+      return window.location.hash;
+    }
+    const header = document.querySelector('header');
+    const headerH = header ? header.offsetHeight : 72;
+    const scrollTop = window.scrollY + headerH + 16;
+    const sections = document.querySelectorAll('section[id]');
+    let best = '';
+    let bestDist = Infinity;
+    sections.forEach((sec) => {
+      const top = sec.offsetTop;
+      const dist = Math.abs(scrollTop - top);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = '#' + sec.id;
+      }
+    });
+    return best;
+  }
+
+  links.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || link.target === '_blank') return;
+      const baseHref = link.getAttribute('href') || '';
+      if (!baseHref) return;
+      const anchor = getCurrentAnchor();
+      const finalHref = anchor ? `${baseHref}${anchor}` : baseHref;
+      e.preventDefault();
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const supportsViewTransitions = typeof document.startViewTransition === 'function';
+
+      if (!prefersReduced && supportsViewTransitions) {
+        // Cross-document view transition for smoother swap
+        document.startViewTransition(() => {
+          window.location.href = finalHref;
+        });
+      } else {
+        // Fallback: quick fade-out then navigate
+        const root = document.documentElement;
+        root.classList.add('lang-switch-fade');
+        setTimeout(() => { window.location.href = finalHref; }, 120);
+      }
+    });
   });
 })();
