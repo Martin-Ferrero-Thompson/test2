@@ -79,3 +79,17 @@ h3,
 section:not(#hero) {
     border: 1px dotted #000;
 }
+
+/* Sticky header helpers */
+:root {
+    --header-height: 72px; /* matches approx py-4 + content in header */
+}
+
+body {
+    padding-top: var(--header-height);
+}
+
+/* Prevent anchor targets from being hidden under fixed header */
+section[id] {
+    scroll-margin-top: calc(var(--header-height) + 12px);
+}
