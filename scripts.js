@@ -174,3 +174,121 @@ updateStat('funds');
     link.addEventListener('click', () => closeMenu());
   });
 })();
+
+
+// ============== SIMPLE TOASTS (SPONSORSHIP DOWNLOAD) ==============
+(function () {
+  const link = document.getElementById('sponsor-download');
+  if (!link) return; // Not on this page
+
+  function ensureRoot() {
+    let root = document.getElementById('toast-root');
+    if (!root) {
+      root = document.createElement('div');
+      root.id = 'toast-root';
+      root.setAttribute('aria-live', 'polite');
+      root.setAttribute('aria-atomic', 'true');
+      document.body.appendChild(root);
+    }
+    // Ensure positioning even if Tailwind classes aren't available
+    root.style.position = 'fixed';
+    root.style.left = '0';
+    root.style.right = '0';
+    root.style.bottom = '24px';
+    root.style.display = 'flex';
+    root.style.justifyContent = 'center';
+    root.style.pointerEvents = 'none';
+    root.style.zIndex = '99999';
+    return root;
+  }
+
+  function showToast(message, opts = {}) {
+    const { duration = 3000 } = opts;
+    const root = ensureRoot();
+
+    // Toast element
+    const toast = document.createElement('div');
+    toast.setAttribute('role', 'status');
+    // Inline styles for reliability
+    toast.style.pointerEvents = 'auto';
+    toast.style.margin = '0 16px';
+    toast.style.minWidth = '240px';
+    toast.style.maxWidth = '420px';
+    toast.style.borderRadius = '12px';
+    toast.style.background = '#111827'; // gray-900
+    toast.style.color = '#fff';
+    toast.style.boxShadow = '0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)';
+    toast.style.padding = '12px 16px';
+    toast.style.display = 'flex';
+    toast.style.alignItems = 'flex-start';
+    toast.style.gap = '12px';
+    toast.style.transform = 'translateY(16px)';
+    toast.style.opacity = '0';
+    toast.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+
+    // Icon
+    const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    icon.setAttribute('viewBox', '0 0 24 24');
+    icon.setAttribute('fill', 'none');
+    icon.setAttribute('stroke', 'currentColor');
+    icon.setAttribute('stroke-width', '2');
+    icon.style.width = '20px';
+    icon.style.height = '20px';
+    icon.style.marginTop = '2px';
+    icon.style.color = '#34D399'; // green-400
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('stroke-linejoin', 'round');
+    path.setAttribute('d', 'M5 13l4 4L19 7');
+    icon.appendChild(path);
+
+    const text = document.createElement('div');
+    text.style.fontSize = '14px';
+    text.textContent = message;
+
+    // Dismiss button
+    const dismiss = document.createElement('button');
+    dismiss.setAttribute('type', 'button');
+    dismiss.setAttribute('aria-label', 'Dismiss notification');
+    dismiss.style.marginLeft = 'auto';
+    dismiss.style.color = 'rgba(255,255,255,0.7)';
+    dismiss.style.background = 'transparent';
+    dismiss.style.border = 'none';
+    dismiss.style.cursor = 'pointer';
+    dismiss.style.fontSize = '18px';
+    dismiss.textContent = '×';
+
+    dismiss.addEventListener('click', () => removeToast());
+
+    function removeToast() {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(16px)';
+      setTimeout(() => {
+        root.removeChild(toast);
+      }, 300);
+    }
+
+    toast.appendChild(icon);
+    toast.appendChild(text);
+    toast.appendChild(dismiss);
+  root.appendChild(toast);
+
+    // animate in
+    requestAnimationFrame(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+    });
+
+    // auto dismiss
+    const t = setTimeout(removeToast, duration);
+
+    // Pause timer on hover
+    toast.addEventListener('mouseenter', () => clearTimeout(t));
+  }
+
+  link.addEventListener('click', function () {
+    const message = this.getAttribute('data-toast-message') || 'Thanks! Your download is starting.';
+    // Fire and forget toast. Do not block navigation; PDF opens in new tab if target set.
+    showToast(message, { duration: 3500 });
+  });
+})();
