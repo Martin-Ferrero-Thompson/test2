@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Riding4GBS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Lato:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="../src/styles/main.css" rel="stylesheet">
+</head>
+
+<body class="bg-white text-gray-900">
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 w-full bg-white shadow z-50 relative">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-600">Riding4GBS</a>
+
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#about"
+                    class="text-lg font-semibold uppercase tracking-wider text-gray-700 py-2 border-b-2 border-transparent hover:border-blue-600 hover:text-blue-600 transition-colors duration-300">About</a>
+                <a href="#story"
+                    class="text-lg font-semibold uppercase tracking-wider text-gray-700 py-2 border-b-2 border-transparent hover:border-blue-600 hover:text-blue-600 transition-colors duration-300">My
+                    Story</a>
+                <a href="#gbs"
+                    class="text-lg font-semibold uppercase tracking-wider text-gray-700 py-2 border-b-2 border-transparent hover:border-blue-600 hover:text-blue-600 transition-colors duration-300">About
+                    GBS</a>
+                <a href="#progress"
+                    class="text-lg font-semibold uppercase tracking-wider text-gray-700 py-2 border-b-2 border-transparent hover:border-blue-600 hover:text-blue-600 transition-colors duration-300">Progress</a>
+                <a href="#sponsors"
+                    class="text-lg font-semibold uppercase tracking-wider text-gray-700 py-2 border-b-2 border-transparent hover:border-blue-600 hover:text-blue-600 transition-colors duration-300">Sponsors</a>
+
+                <a href="#donate"
+                    class="text-white bg-red-600 px-4 py-2 rounded-lg hover:bg-red-700 font-semibold uppercase tracking-wider">Donate
+                    & Support</a>
+            </nav>
+
+            <div class="ml-6 hidden md:flex space-x-3 items-center">
+                <a href="../index.html" class="text-gray-700 hover:text-blue-600 font-semibold">EN</a>
+                <span class="text-gray-400">|</span>
+                <a href="index.html" class="text-gray-700 hover:text-blue-600 font-semibold">ES</a>
+                <!-- <span class="text-gray-400">|</span>
+                <a href="#" class="text-gray-700 hover:text-blue-600 font-semibold">FR</a> -->
+            </div>
+
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-button" type="button" aria-controls="mobile-menu" aria-expanded="false"
+                class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600"
+                title="Open main menu">
+                <span class="sr-only">Open main menu</span>
+                <!-- Menu icon -->
+                <svg id="icon-menu" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <!-- Close icon -->
+                <svg id="icon-close" class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile menu panel -->
+        <div id="mobile-menu"
+            class="md:hidden absolute top-full inset-x-0 bg-white border-t border-gray-200 shadow-lg hidden">
+            <nav class="px-6 py-4 space-y-1" aria-label="Mobile primary">
+                <a href="#about"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">About</a>
+                <a href="#story"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">My
+                    Story</a>
+                <a href="#gbs"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">About
+                    GBS</a>
+                <a href="#progress"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Progress</a>
+                <a href="#sponsors"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Sponsors</a>
+                <a href="#donate"
+                    class="mt-2 block text-center w-full px-4 py-2 rounded-md font-semibold text-white bg-red-600 hover:bg-red-700">Donate
+                    & Support</a>
+                <div class="pt-3 mt-3 border-t border-gray-200 flex items-center gap-3">
+                    <span class="text-sm text-gray-500">Language:</span>
+                    <div class="flex items-center gap-2">
+                        <a href="../index.html" class="text-gray-700 hover:text-blue-600 font-semibold">EN</a>
+                        <span class="text-gray-300">|</span>
+                        <a href="index.html" class="text-gray-700 hover:text-blue-600 font-semibold">ES</a>
+                        <!-- <span class="text-gray-300">|</span>
+                        <a href="#" class="text-gray-700 hover:text-blue-600 font-semibold">FR</a> -->
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative h-screen flex items-center justify-center bg-cover bg-center"
+        style="background-image: url('../hero-bg.png')">
+        <div
+            class="relative z-10 max-w-5xl w-full mx-auto p-8 md:p-12 bg-black/30 backdrop-blur-md rounded-2xl shadow-2xl">
+
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-center text-white">
+                El lento camino de regreso
+            </h1>
+
+            <p class="mt-3 text-2xl md:text-4xl font-bold tracking-wide text-center text-[#0057B8]"
+                style="text-shadow: -1px -1px 0, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
+                #RIDING4GBS
+            </p>
+
+            <p class="mt-3 text-md md:text-xl text-white text-center">
+                <time datetime="2026-09-30">30 de septiembre</time> <span aria-hidden="true">—</span> <time
+                    datetime="2026-10-20">20 de octubre de 2026</time>
+            </p>
+
+            <!-- Countdown to event start -->
+            <div id="countdown" class="mt-4 text-center text-white" aria-live="polite">
+                <div id="cd-display" class="inline-flex items-center gap-3 text-sm md:text-base text-gray-200"></div>
+                <div id="cd-message" class="mt-2 text-sm text-gray-300 sr-only">Cuenta atrás para el inicio del evento
+                </div>
+            </div>
+
+            <p
+                class="mt-6 max-w-3xl mx-auto text-base md:text-lg text-gray-200 text-justify leading-relaxed text-white">
+                En septiembre de 2026, como superviviente del Síndrome de Guillain-Barré (SGB), emprenderé un reto
+                ciclista en solitario profundamente personal: un recorrido de 1.680 km y 21 días desde el Atlántico
+                hasta el Mediterráneo y de vuelta. Esta es mi misión para concienciar y recaudar fondos esenciales
+                destinados a la investigación vital sobre el Síndrome de Guillain-Barré.
+            </p>
+
+            <!-- In-hero partners -->
+            <div class="mt-8">
+                <div class="w-24 mx-auto mb-4">
+                    <div class="h-px bg-white/20 rounded mx-auto"></div>
+                </div>
+                <p class="text-lg font-semibold text-white mb-4 text-center">En orgullosa colaboración con:</p>
+                <div class="flex flex-nowrap justify-center items-stretch gap-6 overflow-x-auto md:overflow-visible">
+                    <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center w-72 min-h-[180px]">
+                        <div class="flex items-center justify-center h-16 w-full mb-3">
+                            <img src="../INUK-Wordmark-Logo_RGB.png" alt="UK Logo"
+                                class="h-14 object-contain bg-white" />
+                        </div>
+                        <div class="mt-auto">
+                            <a href="#" target="_blank"
+                                class="px-3 py-2 bg-blue-600 text-white rounded-md font-semibold">Visit
+                                Website</a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center w-72 min-h-[180px]">
+                        <div class="flex items-center justify-center h-16 w-full mb-3">
+                            <img src="../GBS-CIDP_neuropatias-RC-3.png" alt="ES Logo"
+                                class="h-14 object-contain bg-white" />
+                        </div>
+                        <div class="mt-auto">
+                            <a href="#" target="_blank"
+                                class="px-3 py-2 bg-blue-600 text-white rounded-md font-semibold">Visita el
+                                sitio web</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Placeholder Sections -->
+    <main class="max-w-6xl mx-auto px-6 py-12 space-y-24">
+
+        <section id="about">
+            <div class="bg-white text-gray-800 py-16 md:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-center">
+                        Conquering the Pyrenees: The Route 🏔️
+                    </h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-500">
+                        This is not just a bike ride; it's a complete coast-to-coast-to-coast traverse of one of the
+                        world's most
+                        formidable mountain ranges.
+                    </p>
+
+                    <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                        <div>
+                            <p class="text-4xl md:text-5xl font-bold" style="color:#0057B8;">21</p>
+                            <p class="mt-1 text-lg font-medium text-gray-500">Total Days</p>
+                        </div>
+                        <div>
+                            <p class="text-4xl md:text-5xl font-bold" style="color:#0057B8;">1,685</p>
+                            <p class="mt-1 text-lg font-medium text-gray-500">Kilometres</p>
+                        </div>
+                        <div>
+                            <p class="text-4xl md:text-5xl font-bold" style="color:#0057B8;">34,900</p>
+                            <p class="mt-1 text-lg font-medium text-gray-500">Metres of Climbing</p>
+                        </div>
+                        <div>
+                            <p class="text-4xl md:text-5xl font-bold" style="color:#0057B8;">4x</p>
+                            <p class="mt-1 text-lg font-medium text-gray-500">The Height of Everest</p>
+                        </div>
+                    </div>
+
+                    <hr class="my-16 border-gray-200 w-48 mx-auto">
+
+                    <div class="max-w-4xl mx-auto">
+                        <h3 class="text-3xl font-bold text-center mb-4">The Style: A Self-Supported Journey</h3>
+                        <p class="text-lg text-gray-600 leading-relaxed text-center">
+                            This challenge will be undertaken in a completely <strong>self-supported</strong> style.
+                            There will be no
+                            support car, no pre-booked hotels, and no team of helpers. Every piece of equipment, food,
+                            and shelter
+                            will be carried on the bike. Nights will be spent under the stars in a mix of
+                            <strong>wild-camping</strong> and through the incredible hospitality of the
+                            <strong>Warmshowers</strong>
+                            cycling community. This approach strips the challenge back to its bare essentials: just one
+                            rider, the
+                            mountains, and the kindness of strangers.
+                        </p>
+                    </div>
+
+                    <hr class="my-16 border-gray-200 w-48 mx-auto">
+
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div class="bg-gray-50 p-8 rounded-xl shadow-md">
+                            <h3 class="text-3xl font-bold mb-4">Leg 1: The Epic Crossing</h3>
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                The first eight stages are a brutal and beautiful assault on the highest and most famous
+                                climbs of the
+                                Pyrenees. Following the path of the Tour de France legends, this leg crosses into France
+                                to conquer
+                                icons like the <strong>Col du Tourmalet</strong> before tackling "The Pinnacle"—the
+                                <strong>Port
+                                    d'Envalira</strong> in Andorra. This is a pure test of climbing strength.
+                            </p>
+                        </div>
+                        <div class="bg-gray-50 p-8 rounded-xl shadow-md">
+                            <h3 class="text-3xl font-bold mb-4">Leg 2: The Journey Home</h3>
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                After a rest day on the coast, the return journey begins. This is a test of endurance
+                                and resilience.
+                                The route stays on the Spanish side, tackling the long, remote, and beautiful roads of
+                                the Pre-Pyrenees
+                                in Catalunya, Aragón, and Navarra. The climbs are less steep but just as relentless,
+                                demanding a
+                                different kind of strength for the long road back to the Atlantic.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="story" class="bg-white py-16 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="text-center">
+                    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
+                        My Story: The Slow Road Back
+                    </h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-500">
+                        A journey of resilience, partnership, and a newfound purpose.
+                    </p>
+                </div>
+
+                <div class="mt-12 max-w-4xl mx-auto">
+                    <img class="rounded-xl shadow-lg object-cover w-full h-96"
+                        src="https://placehold.co/1200x800/667/fff?text=A+powerful+photo+of+Martin and Bike"
+                        alt="Martin and Bike">
+                </div>
+
+                <div class="mt-16 grid md:grid-cols-2 gap-x-16 gap-y-12">
+
+                    <div class="space-y-10">
+                        <div>
+                            <h3 class="text-3xl font-bold text-gray-900 mb-4">The Rider Before</h3>
+                            <div class="space-y-4 text-lg text-gray-600 leading-relaxed">
+                                <p>
+                                    For as long as I can remember, my life has been intertwined with the simple freedom
+                                    of a bicycle. I
+                                    was a long-distance cyclist, happiest when pushing my limits on the beautiful roads
+                                    and mountains of
+                                    the UK and Europe. Cycling was more than a hobby; it was a core part of my identity.
+                                    In 2020, life
+                                    brought me back to the UK to care for my parents, and it was during this time that I
+                                    reconnected with
+                                    a wonderful friend in Spain, Edurne. Our friendship blossomed into a relationship,
+                                    and we began
+                                    dreaming of our own cycling adventures together.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-3xl font-bold text-gray-900 mb-4">The Day My World Stopped</h3>
+                            <div class="space-y-4 text-lg text-gray-600 leading-relaxed">
+                                <p>
+                                    On <strong>August 5th, 2021</strong>, that future was thrown into terrifying
+                                    uncertainty. One moment,
+                                    I was walking through the house; the next, I had collapsed on the floor, unable to
+                                    move my legs. I was
+                                    rushed to the hospital, where, after a series of frightening and confusing tests, I
+                                    was diagnosed with
+                                    <strong>Guillain-Barré Syndrome (GBS)</strong>.
+                                </p>
+                                <p>
+                                    I was paralysed from the waist down, with little control of my arms or hands. In the
+                                    space of a day, I
+                                    had gone from a highly active cyclist to being almost completely immobile. It was a
+                                    profoundly dark
+                                    and terrifying place. Throughout this time, my lifeline was Edurne. Separated by
+                                    hundreds of miles,
+                                    she was my constant connection to the outside world, a daily voice of hope on the
+                                    internet that kept
+                                    my spirits from breaking.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-10">
+                        <div>
+                            <h3 class="text-3xl font-bold text-gray-900 mb-4">The Fight for Every Step</h3>
+                            <div class="space-y-4 text-lg text-gray-600 leading-relaxed">
+                                <p>
+                                    The road back was slow and grueling. After the ICU, I was moved to a rehabilitation
+                                    ward for three
+                                    months. With official physiotherapy limited, I knew I had to take charge of my own
+                                    recovery. A fellow
+                                    patient, Ian, and I would race our wheelchairs down the hospital corridors, a small
+                                    act of defiance
+                                    that kept my spirit alive. When I graduated to crutches, I would "escape" the
+                                    hospital grounds,
+                                    pushing myself to walk further each day, determined to rebuild what I had lost.
+                                </p>
+                                <p>
+                                    Recovery continued long after I left the hospital. It was a daily battle, managing
+                                    chronic pain and
+                                    relearning how to live in a body that felt alien to me.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-3xl font-bold text-gray-900 mb-4">A New Beginning, A New Purpose</h3>
+                            <div class="space-y-4 text-lg text-gray-600 leading-relaxed">
+                                <p>
+                                    The greatest source of strength through it all was my relationship with Edurne. In
+                                    2023, I moved to
+                                    Pamplona, and we were married. With her incredible support, I finally weaned myself
+                                    off the last of
+                                    the medication. We had built a new life together.
+                                </p>
+                                <p>
+                                    Living here, surrounded by the mountains I love, I realized my perspective had
+                                    changed. GBS had taken
+                                    away a lot of my power, but it had given me something in return: a deeper
+                                    appreciation for the journey
+                                    itself. This is my <strong>"Slow Road Back."</strong>
+                                </p>
+                                <p>
+                                    It was from this new perspective that the idea for this challenge was born. This
+                                    ride is a solo
+                                    challenge, a personal pilgrimage, but it is made possible by Edurne's unwavering
+                                    support—she will be
+                                    there at the start and, most importantly, waiting for me at the finish. This journey
+                                    is for her, and
+                                    for every person affected by GBS.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="gbs" class="bg-gray-100 py-16 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-center text-gray-900">
+                    What is GBS?
+                </h2>
+                <p class="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-500">
+                    Understanding the condition behind the challenge.
+                </p>
+                <!-- <div class="max-w-4xl mx-auto my-12 px-4">
+          <img src="./gbs-info.png"
+            alt="An infographic summarizing key facts about Guillain-Barré Syndrome, including its rarity (1-2 in 100,000), cause (autoimmune), and recovery statistics (~85% recover well, ~15% have long-term effects)."
+            class="w-full h-auto rounded-lg shadow-xl">
+        </div> -->
+                <div class="mt-16 grid md:grid-cols-2 gap-x-16 gap-y-12">
+                    <div class="space-y-10">
+
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">What is Guillain-Barré Syndrome?</h3>
+                            <div class="space-y-4 text-lg text-gray-600 leading-relaxed">
+                                <p>
+                                    Guillain-Barré Syndrome (GBS) is a rare and serious autoimmune disorder where the
+                                    body's immune system
+                                    mistakenly attacks its own peripheral nerves—the network outside of the brain and
+                                    spinal cord.
+                                </p>
+                                <p>
+                                    The onset is often sudden, escalating over hours or days into a neurological
+                                    emergency. It is the
+                                    leading cause of acute, non-trauma-related paralysis worldwide.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">A Case of Mistaken Identity</h3>
+                            <div class="space-y-4 text-lg text-gray-600 leading-relaxed">
+                                <p>
+                                    The most accepted theory is <strong class="font-semibold text-gray-900">"molecular
+                                        mimicry"</strong>.
+                                    Often, the syndrome begins after a common infection, like a stomach bug
+                                    (*Campylobacter jejuni*) or a
+                                    respiratory virus.
+                                </p>
+                                <p>
+                                    The immune system creates antibodies to fight the germ, but some parts of the germ
+                                    look remarkably
+                                    similar to our own nerve cells. The antibodies make a catastrophic error and begin
+                                    attacking the
+                                    healthy nerves, leading to the weakness, numbness, and paralysis that define GBS.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Hope on the Horizon</h3>
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                While current treatments help, they are not a cure and are not effective for everyone.
+                                This is why
+                                research is so critical. Scientists are working to find faster diagnostic tools and
+                                develop new, more
+                                targeted therapies. Your support helps fuel this vital research and brings hope to every
+                                person affected
+                                by GBS.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="space-y-10">
+
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">A Rapidly Escalating Emergency</h3>
+                            <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                                Symptoms often begin with tingling in the feet and hands, quickly followed by muscle
+                                weakness that
+                                spreads upwards over hours or days. At its most severe, GBS can be devastating:
+                            </p>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0"><svg class="h-6 w-6 text-red-500" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                        </svg></div>
+                                    <p class="ml-3 text-lg text-gray-600"><strong
+                                            class="font-semibold text-gray-900">Respiratory
+                                            Failure:</strong> Up to one-third of patients require a mechanical
+                                        ventilator in an ICU to
+                                        survive.</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0"><svg class="h-6 w-6 text-red-500" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                        </svg></div>
+                                    <p class="ml-3 text-lg text-gray-600"><strong
+                                            class="font-semibold text-gray-900">Severe Pain &
+                                            Paralysis:</strong> Many patients experience near-total paralysis and
+                                        debilitating nerve pain.</p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">The Long Road to Recovery</h3>
+                            <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                                Recovery from GBS is a marathon. While most people learn to walk again, the process can
+                                take months or
+                                even years, and many survivors are left with life-altering residual issues, including:
+                            </p>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0"><svg class="h-6 w-6 text-blue-500" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg></div>
+                                    <p class="ml-3 text-lg text-gray-600">Chronic Neuropathic Pain</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0"><svg class="h-6 w-6 text-blue-500" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg></div>
+                                    <p class="ml-3 text-lg text-gray-600">Debilitating Fatigue</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0"><svg class="h-6 w-6 text-blue-500" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg></div>
+                                    <p class="ml-3 text-lg text-gray-600">Lingering Weakness and Numbness</p>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="mt-12 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <img src="../gbs--details.png" alt="Guillain-Barré Syndrome Explanation - Neuron and Nerve System"
+                        class="rounded-xl shadow-lg w-full object-cover">
+                    <p class="mt-4 text-center text-sm text-gray-500">
+                        *Image illustrating the impact of GBS on nerve cells and pathways.
+                    </p>
+                </div>
+
+                <hr class="my-16 border-gray-200 w-48 mx-auto">
+
+                <div class="max-w-4xl mx-auto">
+                    <h3 class="text-3xl font-bold text-center mb-8">Find Out More</h3>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                        <div class="bg-white rounded-xl shadow-md p-6 flex flex-col text-center">
+                            <h4 class="text-xl font-bold text-gray-900">GBS|CIDP Foundation Int.</h4>
+                            <p class="text-gray-600 mt-2 flex-grow text-sm">The leading global nonprofit for supporting
+                                patients and
+                                funding research for GBS.</p>
+                            <a href="https://www.gbs-cidp.org/" target="_blank" rel="noopener noreferrer"
+                                class="mt-4 inline-block text-blue-600 font-semibold hover:underline">Visit Website
+                                &rarr;</a>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6 flex flex-col text-center">
+                            <h4 class="text-xl font-bold text-gray-900">GBS|CIDP España</h4>
+                            <p class="text-gray-600 mt-2 flex-grow text-sm">A patient advocacy group based in Spain,
+                                providing support
+                                and resources.</p>
+                            <a href="https://gbs-cidp.org.es/" target="_blank" rel="noopener noreferrer"
+                                class="text-blue-600 font-semibold hover:underline">Visit Website &rarr;</a>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6 flex flex-col text-center">
+                            <h4 class="text-xl font-bold text-gray-900">NINDS (USA)</h4>
+                            <p class="text-gray-600 mt-2 flex-grow text-sm">Provides reliable, in-depth medical
+                                information on GBS
+                                from the U.S. National Institutes of Health.</p>
+                            <a href="https://www.ninds.nih.gov/health-information/disorders/guillain-barre-syndrome"
+                                target="_blank" rel="noopener noreferrer"
+                                class="text-blue-600 font-semibold hover:underline">Visit Information Page
+                                &rarr;</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="progress" class="bg-gray-100 py-16 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="text-center">
+                    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
+                        Follow The Journey: Live Progress
+                    </h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-500">
+                        During the ride in Sept/Oct 2026, this page will be the official hub to follow my progress in
+                        real-time.
+                        Check back daily for updates from the road!
+                    </p>
+                </div>
+
+                <div class="mt-16 grid lg:grid-cols-3 gap-12 items-start">
+
+                    <div class="lg:col-span-2">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-4">Live Location Map</h3>
+                        <p class="text-lg text-gray-600 mb-4">
+                            Once the ride begins, this map will show my completed route for each day. You'll be able to
+                            see exactly
+                            which mountain pass I've climbed or which valley I'm riding through!
+                        </p>
+                        <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-xl shadow-lg overflow-hidden">
+                            <img src="../riding4gbs-atlantics2med.png"
+                                alt="The complete 1,685km route map for the Riding for GBS Pyrenean challenge."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="max-w-4xl mx-auto mt-8 px-4">
+                            <img src="../riding4gbs-atlantic2med-profile.png"
+                                alt="The complete elevation profile for the 1,685km Riding for GBS Pyrenean challenge."
+                                class="w-full h-auto rounded-lg shadow-xl">
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-800 rounded-xl shadow-lg p-6 space-y-6 progress-panel">
+                        <h3 class="text-3xl font-bold text-center text-white">By the Numbers</h3>
+
+                        <div id="days-stat">
+                            <div class="flex justify-between items-baseline mb-1">
+                                <span class="text-base font-medium text-gray-300 progress-label"></span>
+                                <span class="text-lg font-bold text-white progress-value"></span>
+                            </div>
+                            <div class="w-full bg-gray-600 rounded-full h-4">
+                                <div class="bg-blue-500 h-4 rounded-full progress-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div id="distance-stat">
+                            <div class="flex justify-between items-baseline mb-1">
+                                <span class="text-base font-medium text-gray-300 progress-label"></span>
+                                <span class="text-lg font-bold text-white progress-value"></span>
+                            </div>
+                            <div class="w-full bg-gray-600 rounded-full h-4">
+                                <div class="bg-blue-500 h-4 rounded-full progress-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div id="climbing-stat">
+                            <div class="flex justify-between items-baseline mb-1">
+                                <span class="text-base font-medium text-gray-300 progress-label"></span>
+                                <span class="text-lg font-bold text-white progress-value"></span>
+                            </div>
+                            <div class="w-full bg-gray-600 rounded-full h-4">
+                                <div class="bg-blue-500 h-4 rounded-full progress-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div id="funds-stat" class="pt-4">
+                            <div class="text-center">
+                                <span class="text-base font-medium text-gray-300 progress-label"></span>
+                                <span class="text-4xl font-bold text-blue-400 progress-value block"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="mt-20">
+                    <hr class="my-16 border-gray-300 w-48 mx-auto">
+                    <div class="text-center">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-4">Daily Ride Journal</h3>
+                        <p class="text-center text-lg text-gray-500 mb-8">
+                            Daily updates from the road will appear here once the challenge begins in September 2026!
+                        </p>
+                    </div>
+                    <div class="max-w-4xl mx-auto space-y-8">
+                        <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col md:flex-row gap-6 opacity-50">
+                            <img src="https://placehold.co/600x400/333/fff?text=Epic+Pyrenees+Photo"
+                                alt="View from the Tourmalet"
+                                class="w-full md:w-1/3 h-48 md:h-auto object-cover rounded-lg">
+                            <div class="flex flex-col">
+                                <p class="text-sm font-semibold text-gray-500">Day 5 of 21</p>
+                                <h4 class="text-2xl font-bold text-gray-900">Conquering the Tourmalet</h4>
+                                <p class="mt-2 text-gray-600 leading-relaxed flex-grow">
+                                    Today was the big one. The Queen Stage... Every pedal stroke was fueled by the
+                                    messages of support and the thought of the vital research we are funding. An
+                                    unforgettable day. Now,
+                                    for some food!
+                                </p>
+                                <a href="#" class="mt-4 text-blue-600 font-semibold hover:underline self-start">View on
+                                    Strava
+                                    &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sponsors" class="bg-white py-16 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="text-center">
+                    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
+                        Nuestros socios: el equipo detrás del reto
+                    </h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-500">
+                        Este ambicioso reto solo es posible gracias al generoso apoyo de nuestros socios. Cada
+                        contribución—ya sea económica o en especie—alimenta directamente nuestra misión de concienciar y
+                        financiar la investigación vital sobre el Síndrome de Guillain-Barré. Estamos profundamente
+                        agradecidos a las siguientes organizaciones por creer en nuestro viaje.
+                    </p>
+                </div>
+
+                <div class="mt-16">
+                    <div class="mb-12">
+                        <h3 class="text-2xl font-bold text-center text-gray-400 tracking-wider uppercase">Pirineo
+                            Partners</h3>
+                        <div class="mt-8 flex flex-wrap justify-center items-center gap-x-12 gap-y-6">
+                            <img src="../GBS-CIDP_neuropatias-RC-3.png" alt="GBS|CIDP España Logo"
+                                class="h-16 opacity-90 hover:opacity-100 transition" title="GBS|CIDP España">
+                            <img src="../INUK-Wordmark-Logo_RGB.png" alt="Inflammatory Neuropathies UK Logo"
+                                class="h-16 opacity-90 hover:opacity-100 transition"
+                                title="Inflammatory Neuropathies UK">
+                        </div>
+                    </div>
+                    <div class="mb-12">
+                        <h3 class="text-xl font-bold text-center text-gray-400 tracking-wider uppercase">Cima Supporters
+                        </h3>
+                        <div class="mt-6 flex flex-wrap justify-center items-center gap-8">
+                            <img src="https://placehold.co/180x90/666/fff?text=Supporter+Logo" alt="Sponsor Logo"
+                                class="h-14 opacity-90">
+                            <img src="https://placehold.co/180x90/666/fff?text=Supporter+Logo" alt="Sponsor Logo"
+                                class="h-14 opacity-90">
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-center text-gray-400 tracking-wider uppercase">Amigos del Reto
+                        </h3>
+                        <div class="mt-6 flex flex-wrap justify-center items-center gap-8">
+                            <img src="https://placehold.co/150x75/666/fff?text=Amigo+Logo" alt="Sponsor Logo"
+                                class="h-12 opacity-80">
+                            <img src="https://placehold.co/150x75/666/fff?text=Amigo+Logo" alt="Sponsor Logo"
+                                class="h-12 opacity-80">
+                            <img src="https://placehold.co/150x75/666/fff?text=Amigo+Logo" alt="Sponsor Logo"
+                                class="h-12 opacity-80">
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-16 border-gray-200 w-48 mx-auto">
+
+                <div class="bg-gray-100 rounded-2xl p-12 text-center">
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900">
+                        Conviértete en socio: únete al viaje
+                    </h3>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
+                        Asocia tu marca a una poderosa historia internacional de resiliencia, esperanza y resistencia.
+                        Ofrecemos una oportunidad única para dar visibilidad a tus productos y servicios ante una
+                        audiencia comprometida en España, el Reino Unido y más allá. Al asociarte con nosotros, no solo
+                        patrocinas una ruta en bicicleta; estás financiando una cura e inspirando a una comunidad.
+                    </p>
+                    <div class="mt-8">
+                        <a href="[LINK_TO_SPONSORSHIP_PACKET.PDF]"
+                            class="inline-block px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg rounded-full transition-all duration-300 transform hover:scale-105">
+                            Descargar el dossier de patrocinio
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="donate" class="relative overflow-hidden bg-gray-900 text-white py-16 md:py-24"
+            style="background-image: url('../images/riding4gbs-hero.png'); background-size: cover; background-position: center; background-attachment: fixed;">
+            <div class="absolute inset-0 bg-black/80 pointer-events-none z-0"></div>
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="text-center">
+                    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">
+                        Apoya la misión: financia una cura
+                    </h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-300 leading-relaxed">
+                        This epic challenge is dedicated to one single goal: funding the vital research that will lead
+                        to better treatments and, one day, a cure for Guillain-Barré Syndrome. 100% of every charitable
+                        donation goes directly to our official partner organizations. Your contribution, no matter the
+                        size, is a powerful act of hope for every person affected by this devastating condition."
+                        → "Este desafío épico está dedicado a un único objetivo: financiar la investigación vital que
+                        conducirá a mejores tratamientos y, algún día, a una cura para el Síndrome de Guillain-Barré. El
+                        100% de cada donación benéfica va directamente a nuestras organizaciones asociadas oficiales. Tu
+                        contribución, sin importar su tamaño, es un poderoso acto de esperanza para cada persona
+                        afectada por esta devastadora enfermedad.
+                    </p>
+                </div>
+
+                <div class="mt-16 max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+
+                    <div class="bg-white rounded-2xl shadow-lg p-8 text-center flex flex-col">
+                        <h3 class="text-2xl font-bold text-gray-900">For UK Donors</h3>
+                        <div class="my-4 flex-grow flex justify-center items-center">
+                            <img src="../INUK-Wordmark-Logo_RGB.png" alt="Inflammatory Neuropathies UK Logo"
+                                class="h-12">
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                            Support the research funded by Inflammatory Neuropathies UK. UK taxpayers can add 25% to
+                            their donation at
+                            no extra cost through <strong>Gift Aid</strong>.
+                        </p>
+                        <a href="[LINK_TO_UK_JUSTGIVING_PAGE]" target="_blank"
+                            class="mt-6 inline-block w-full px-8 py-4 text-white bg-red-600 px-4 py-2 hover:bg-red-700 font-bold text-lg rounded-full transition-all duration-300 transform hover:scale-105">
+                            Donate in £ (GBP)
+                        </a>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-8 text-center flex flex-col">
+                        <h3 class="text-2xl font-bold text-gray-900">Para donantes de España y la UE</h3>
+                        <div class="my-4 flex-grow flex justify-center items-center">
+                            <img src="../GBS-CIDP_neuropatias-RC-3.png" alt="GBS CIDP España Logo" class="h-12">
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                            Apoya la investigación financiada por GBS|CIDP España para ayudar a los pacientes en toda
+                            España.
+                        </p>
+                        <a href="[LINK_TO_SPANISH_DONATION_PAGE]" target="_blank"
+                            class="mt-6 inline-block w-full px-8 py-4 text-white bg-red-600 px-4 py-2 hover:bg-red-700 font-bold text-white font-bold text-lg rounded-full transition-all duration-300 transform hover:scale-105">
+                            Donar en € (EUR)
+                        </a>
+                    </div>
+
+                </div>
+                <hr class="my-16 border-white/20 w-48 mx-auto">
+
+                <div class="text-center max-w-2xl mx-auto">
+                    <h3 class="text-2xl font-bold">Fuel the Rider ☕ or 🥖 (Optional Support)</h3>
+                    <p class="mt-2 text-gray-300 leading-relaxed">
+                        If you'd also like to contribute directly to the on-the-road costs of this self-supported
+                        journey, you can buy me a coffee! This is entirely separate from the charity fundraising and
+                        helps with the fuel needed to complete the challenge."
+                        → "Si también quieres contribuir directamente a los gastos en ruta de este viaje autogestionado,
+                        ¡puedes invitarme a un café! Esto es totalmente independiente de la recaudación benéfica y ayuda
+                        con el combustible necesario para completar el reto.
+                    </p>
+                    <a href="[LINK_TO_YOUR_KOFI_PAGE]" target="_blank"
+                        class="mt-6 inline-block px-8 py-3 bg-gray-600 hover:bg-gray-700 text-white font-semibold text-lg rounded-full transition-all duration-300">
+                        Invítame a un café
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-6 text-center text-gray-600">
+            <p>En orgullosa colaboración con:</p>
+            <div class="flex justify-center space-x-6 my-4">
+                <img src="../INUK-Wordmark-Logo_RGB.png" alt="GBS UK" class="h-10" />
+                <img src="../GBS-CIDP_neuropatias-RC-3.png" alt="GBS Spain" class="h-10" />
+            </div>
+            <p class="text-sm">&copy; 2025 Riding4GBS. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../scripts.js"></script>
+
+</body>
+
+</html>
