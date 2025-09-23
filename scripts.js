@@ -89,27 +89,32 @@
   const campaignConfig = {
     days: {
       label: isES ? "Días completados" : "Days Completed",
-      current: 3, // <-- UPDATE THIS NUMBER
+      current: 11, // <-- UPDATE THIS NUMBER
       total: 21,
       unit: ''
     },
     distance: {
       label: isES ? "Kilómetros recorridos" : "Distance Ridden",
-      current: 756, // <-- UPDATE THIS NUMBER
+      current: 730, // <-- UPDATE THIS NUMBER
       total: 1685,
       unit: 'km'
     },
     climbing: {
       label: isES ? "Metros ascendidos" : "Metres Climbed",
-      current: 5999, // <-- UPDATE THIS NUMBER
+      current: 17900, // <-- UPDATE THIS NUMBER
       total: 34900,
       unit: 'm'
     },
-    funds: {
-      label: isES ? "Fondos recaudados para el SGB" : "Funds Raised for GBS",
-      current: 20, // <-- UPDATE THIS NUMBER
-      unit: isES ? '€' : '£'
-   }
+    "funds-gbp": {
+      label: isES ? "Fondos recaudados para el SGB (GBP)" : "Funds Raised for GBS (GBP)",
+      current: 2000.00, // <-- UPDATE THIS NUMBER (GBP). Decimals allowed, e.g., 2000.50
+      unit: '£'
+    },
+    "funds-eur": {
+      label: isES ? "Fondos recaudados para el SGB (EUR)" : "Funds Raised for GBS (EUR)",
+      current: 4800.00, // <-- UPDATE THIS NUMBER (EUR). Decimals allowed, e.g., 4800.75
+      unit: '€'
+    }
   };
 
   // This function updates a single stat block in the HTML
@@ -126,18 +131,54 @@ function updateStat(statName) {
   if (!valueEl || !labelEl) return;
 
   const locale = isES ? 'es-ES' : 'en-GB';
-  const formattedCurrent = config.current.toLocaleString(locale, {minimumFractionDigits: 0, maximumFractionDigits: 0});
+  const numberFmt = new Intl.NumberFormat(locale, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  const formattedCurrent = numberFmt.format(config.current);
   
   // Update the text label
   labelEl.textContent = config.label;
 
   // Update the value - check if it's a progress stat or a simple stat
   if (config.total) {
-    const formattedTotal = config.total.toLocaleString(locale);
+    const formattedTotal = numberFmt.format(config.total);
     valueEl.textContent = `${formattedCurrent} / ${formattedTotal} ${config.unit}`.trim();
   } else {
-    // Place symbol after for EUR in Spanish, before for GBP in English
-    valueEl.textContent = isES ? `${formattedCurrent}${config.unit}` : `${config.unit}${formattedCurrent}`;
+    // Currency-only stats: follow currency-specific display rules (not page locale)
+    // GBP: £ before number, comma thousands, dot decimals (en-GB)
+    // EUR: period thousands, comma decimals, symbol after with space (es-ES)
+    const unit = (config.unit || '').trim();
+    const currency = unit === '€' ? 'EUR' : unit === '£' ? 'GBP' : null;
+    if (currency) {
+      try {
+        const currencyLocale = currency === 'GBP' ? 'en-GB' : currency === 'EUR' ? 'es-ES' : locale;
+        const currencyFmt = new Intl.NumberFormat(currencyLocale, {
+          style: 'currency',
+          currency,
+          currencyDisplay: 'narrowSymbol',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+          useGrouping: 'always',
+        });
+        valueEl.textContent = currencyFmt.format(Number(config.current));
+      } catch (e) {
+        // Fallback if Intl fails for some reason
+        const n = Number(config.current);
+        const [intPartRaw, fracPartRaw] = n.toFixed(2).split('.');
+        if (currency === 'GBP') {
+          // Add comma thousands, dot decimals, symbol before
+          const intPart = intPartRaw.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+          valueEl.textContent = `${unit}${intPart}.${fracPartRaw}`;
+        } else if (currency === 'EUR') {
+          // Add period thousands, comma decimals, symbol after with space
+          const intPart = intPartRaw.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+          valueEl.textContent = `${intPart},${fracPartRaw} ${unit}`;
+        } else {
+          valueEl.textContent = `${n.toFixed(2)} ${unit}`.trim();
+        }
+      }
+    } else {
+      // Non-currency simple stat (shouldn't happen here, but safe fallback)
+      valueEl.textContent = `${formattedCurrent} ${unit}`.trim();
+    }
   }
   
   // Update the progress bar, if it exists
@@ -152,7 +193,8 @@ function updateStat(statName) {
 updateStat('days');
 updateStat('distance');
 updateStat('climbing');
-updateStat('funds'); 
+updateStat('funds-gbp');
+updateStat('funds-eur'); 
 })();
 
 
