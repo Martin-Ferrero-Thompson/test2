@@ -320,10 +320,57 @@ updateStat('funds');
     toast.addEventListener('mouseenter', () => clearTimeout(t));
   }
 
-  link.addEventListener('click', function () {
+  // Modal behavior (re-query elements at interaction time to avoid load-order issues)
+  const mainRoot = document.querySelector('main');
+
+  function getModalEls() {
+    const modal = document.getElementById('sponsor-modal');
+    const modalClose = document.getElementById('sponsor-modal-close');
+    const modalOverlay = modal ? modal.querySelector('[data-modal-close]') : null;
+    return { modal, modalClose, modalOverlay };
+  }
+
+  function openModal() {
+    const { modal, modalClose, modalOverlay } = getModalEls();
+    if (!modal) return;
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    if (mainRoot) mainRoot.setAttribute('aria-hidden', 'true');
+    // focus close button for accessibility
+    if (modalClose) modalClose.focus();
+    // lazily bind close handlers once per open if not already
+    if (modal && !modal.dataset.bound) {
+      if (modalClose) modalClose.addEventListener('click', closeModal);
+      if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
+      modal.dataset.bound = 'true';
+    }
+  }
+
+  function closeModal() {
+    const { modal } = getModalEls();
+    if (!modal) return;
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+    if (mainRoot) mainRoot.removeAttribute('aria-hidden');
+    // return focus to trigger
+    link.focus();
+  }
+
+  link.addEventListener('click', function (e) {
+    if (this.getAttribute('data-modal') === 'true') {
+      e.preventDefault();
+      openModal();
+      return;
+    }
     const message = this.getAttribute('data-toast-message') || (isES ? '¡Gracias! Tu descarga está comenzando.' : 'Thanks! Your download is starting.');
-    // Fire and forget toast. Do not block navigation; PDF opens in new tab if target set.
     showToast(message, { duration: 3500 });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    const { modal } = getModalEls();
+    if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+      closeModal();
+    }
   });
 })();
 
