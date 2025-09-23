@@ -116,3 +116,160 @@ html {
     opacity: 0;
     transition: opacity 150ms ease;
 }
+
+/* ==========================
+     Desktop/Laptop Enhancements (no mobile changes)
+     ========================== */
+
+/* Aspect ratio helpers for 16:9 blocks (since Tailwind aspect plugin isn't enabled) */
+.aspect-w-16.aspect-h-9 {
+        position: relative;
+}
+.aspect-w-16.aspect-h-9::before {
+        content: "";
+        display: block;
+        padding-top: 56.25%; /* 9 / 16 */
+}
+.aspect-w-16.aspect-h-9 > * {
+        position: absolute;
+        inset: 0;
+}
+
+/*
+    Increase maximum content widths progressively for larger screens.
+    These overrides only apply at desktop/laptop sizes, preserving mobile styles.
+*/
+@media (min-width: 1280px) { /* Laptop (Small) */
+    .max-w-5xl { max-width: 72rem !important; }   /* 1152px */
+    .max-w-6xl { max-width: 76rem !important; }   /* 1216px */
+    .max-w-7xl { max-width: 84rem !important; }   /* 1344px */
+}
+
+@media (min-width: 1366px) { /* Laptop (1366x768) */
+    .max-w-6xl { max-width: 80rem !important; }   /* 1280px */
+}
+
+@media (min-width: 1440px) { /* Laptop (1440x900) */
+    .max-w-5xl { max-width: 76rem !important; }   /* 1216px */
+    .max-w-6xl { max-width: 84rem !important; }   /* 1344px */
+    .max-w-7xl { max-width: 90rem !important; }   /* 1440px */
+
+    /* Slightly larger hero heading for comfortable reading distance */
+    #hero h1 { font-size: clamp(3rem, 3.3vw, 5rem); }
+    /* Larger progress headline */
+    .progress-panel h3 { font-size: clamp(2rem, 2.2vw, 2.75rem); }
+    /* Scale up the big numbers (GBP/EUR) */
+    .progress-panel .progress-value { font-size: clamp(2rem, 2.2vw, 3rem); }
+}
+
+@media (min-width: 1536px) { /* Laptop (Large) */
+    .max-w-4xl { max-width: 72rem !important; }   /* 1152px */
+    .max-w-5xl { max-width: 80rem !important; }   /* 1280px */
+    .max-w-6xl { max-width: 90rem !important; }   /* 1440px */
+    .max-w-7xl { max-width: 96rem !important; }   /* 1536px */
+}
+
+@media (min-width: 1920px) { /* Desktop (Full HD) */
+    .max-w-4xl { max-width: 76rem !important; }   /* 1216px */
+    .max-w-5xl { max-width: 88rem !important; }   /* 1408px */
+    .max-w-6xl { max-width: 100rem !important; }  /* 1600px */
+    .max-w-7xl { max-width: 110rem !important; }  /* 1760px */
+
+    /* Increase internal spacing slightly for large viewports */
+    .progress-panel { padding: 2rem !important; }
+}
+
+@media (min-width: 2560px) { /* Desktop (QHD) */
+    .max-w-4xl { max-width: 84rem !important; }   /* 1344px */
+    .max-w-5xl { max-width: 96rem !important; }   /* 1536px */
+    .max-w-6xl { max-width: 112rem !important; }  /* 1792px */
+    .max-w-7xl { max-width: 120rem !important; }  /* 1920px */
+
+    /* Hero overlay card: increase size, padding, and contrast */
+    #hero .bg-black\/30.backdrop-blur-md {
+        max-width: 110rem !important; /* ~1760px */
+        padding: 4rem 4.5rem !important;
+        background-color: rgba(0, 0, 0, 0.45) !important; /* more contrast */
+    }
+    #hero h1 {
+        font-size: clamp(3.5rem, 3.6vw, 6.5rem);
+        line-height: 1.1;
+    }
+    /* Tagline (#RIDING4GBS) */
+    #hero p.font-bold.tracking-wide {
+        font-size: clamp(2rem, 2.4vw, 3.25rem);
+    }
+    /* Date line and paragraph copy within hero */
+    #hero p { font-size: 2rem; line-height: 1.7; }
+    #hero .bg-black\/30.backdrop-blur-md p { max-width: 75ch; margin-left: auto; margin-right: auto; }
+    /* Countdown numbers */
+    #cd-display { font-size: 1.25rem; }
+
+        /* General body copy scaling for better readability at QHD */
+        main p,
+        main li {
+            font-size: 1.25rem !important; /* ~20px */
+            line-height: 1.85 !important;
+        }
+
+            /* Countdown: enlarge numbers and set labels to ~50% of number size */
+            #cd-display .text-center > div:first-child { /* the number */
+                font-size: clamp(2rem, 2.4vw, 3.5rem) !important;
+                line-height: 1.1 !important;
+            }
+            #cd-display > div:not(.text-center) { /* the colon separators */
+                font-size: clamp(2rem, 2.4vw, 3.5rem) !important;
+                line-height: 1.1 !important;
+            }
+            #cd-display .text-center > div:last-child { /* the unit label */
+                font-size: clamp(1rem, 1.2vw, 1.75rem) !important; /* ~50% of number */
+                letter-spacing: 0.02em;
+            }
+}
+
+@media (min-width: 3840px) { /* Desktop (4K) */
+    .max-w-4xl { max-width: 96rem !important; }   /* 1536px */
+    .max-w-5xl { max-width: 112rem !important; }  /* 1792px */
+    .max-w-6xl { max-width: 128rem !important; }  /* 2048px */
+    .max-w-7xl { max-width: 132rem !important; }  /* 2112px */
+
+    /* Prevent over-long line lengths for paragraphs in very wide viewports */
+    main p { max-width: 85ch; }
+
+    /* Further enhance hero overlay on 4K */
+    #hero .bg-black\/30.backdrop-blur-md {
+        max-width: 120rem !important; /* ~1920px */
+        padding: 5rem 5.5rem !important;
+        background-color: rgba(0, 0, 0, 0.5) !important;
+    }
+    #hero h1 {
+        font-size: clamp(4rem, 4.2vw, 8rem);
+        line-height: 1.08;
+    }
+    #hero p.font-bold.tracking-wide {
+        font-size: clamp(2.5rem, 3.0vw, 4rem);
+    }
+    #hero p { font-size: 2.5rem; }
+    #cd-display { font-size: 1.35rem; }
+
+        /* General body copy scaling for better readability at 4K */
+        main p,
+        main li {
+            font-size: 1.375rem !important; /* ~22px */
+            line-height: 1.9 !important;
+        }
+
+            /* Countdown at 4K: further enlarge */
+            #cd-display .text-center > div:first-child { /* number */
+                font-size: clamp(2.5rem, 2.6vw, 4.25rem) !important;
+                line-height: 1.08 !important;
+            }
+            #cd-display > div:not(.text-center) { /* colon */
+                font-size: clamp(2.5rem, 2.6vw, 4.25rem) !important;
+                line-height: 1.08 !important;
+            }
+            #cd-display .text-center > div:last-child { /* unit label */
+                font-size: clamp(1.25rem, 1.3vw, 2.125rem) !important;
+                letter-spacing: 0.02em;
+            }
+}
