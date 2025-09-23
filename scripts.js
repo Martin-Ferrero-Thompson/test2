@@ -106,12 +106,12 @@
       unit: 'm'
     },
     "funds-gbp": {
-      label: isES ? "Fondos recaudados para el SGB (GBP)" : "Funds Raised for GBS (GBP)",
+      label: isES ? "Fondos recaudados para GBS UK" : "Funds Raised for GBS UK",
       current: 2000.00, // <-- UPDATE THIS NUMBER (GBP). Decimals allowed, e.g., 2000.50
       unit: '£'
     },
     "funds-eur": {
-      label: isES ? "Fondos recaudados para el SGB (EUR)" : "Funds Raised for GBS (EUR)",
+      label: isES ? "Fondos recaudados para GBS UK" : "Funds Raised for GBS España",
       current: 4800.00, // <-- UPDATE THIS NUMBER (EUR). Decimals allowed, e.g., 4800.75
       unit: '€'
     }
